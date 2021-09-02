@@ -1,0 +1,66 @@
+params {
+    // Stage parameters
+    no_analysis = false
+    no_bagel = false
+
+    // Processed count parameters
+    processed_count_id_column_index = 1
+    processed_count_gene_column_index = 2
+    processed_counts_delim = "\t"
+    processed_counts_header = true
+
+    // Processed library parameters
+    processed_library_id_column_index = 1
+    processed_library_gene_column_index = 2
+    processed_library_chr_column_index = 3
+    processed_library_start_column_index = 4
+    processed_library_end_column_index = 5
+    processed_library_delim = "\t"
+    processed_library_header = true
+
+    // Processed metadata parameters
+    processed_info_filename_column_index = 1
+    processed_info_label_column_index = 2
+    processed_info_plasmid_column_index = 3
+    processed_info_control_column_index = 4
+    processed_info_treatment_column_index = 5
+    processed_info_delim = "\t"
+    processed_info_header = true
+
+    // BAGEL normalisation
+    bagel_normalisation_pseudocount = 5
+    bagel_normalisation_scaling_factor = 10000000
+    bagel_normalisation_outdir = "."
+    bagel_normalisation_outfile = "count_matrix.BAGEL.normalised.tsv"
+    bagel_normalisation_rdata = "BAGEL_normalisation.Rdata"
+
+    // BAGEL fold change (fc)
+    bagel_fc_extra_options = false
+
+    // BAGEL Bayes factor (bf)
+    bagel_bf_extra_options = false
+
+    // Scaled log fold changes
+    scaled_bf_threshold = 0.05
+    scaled_bf_outdir = "."
+    scaled_bf_infile_id_column_index = null
+    scaled_bf_infile_gene_column_index = 1
+    scaled_bf_infile_data_column_index = 2
+    scaled_bf_infile_delim = "\t"
+    scaled_bf_infile_header = true
+    scaled_bf_rdata = "scaled_BF.Rdata"
+
+    // Essential genes
+    essential_genes = null
+    ess = params.essential_genes
+    ess_gene_column_index = 1
+    no_ess_header = true
+    ess_delim = "\t"
+
+    // Non-essential genes
+    nonessential_genes = null
+    noness = params.nonessential_genes
+    noness_gene_column_index = 1
+    no_noness_header = true
+    noness_delim = "\t"
+}

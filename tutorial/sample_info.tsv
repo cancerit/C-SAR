@@ -1,0 +1,5 @@
+filename	label	plasmid	control	treatment	group	replicate
+HAP1_T0.tsv	HAP1_T0	0	1	0	T0	1
+HAP1_T18A.tsv	HAP1_T18A	0	0	1	T18	1
+HAP1_T18B.tsv	HAP1_T18B	0	0	1	T18	2
+HAP1_T18C.tsv	HAP1_T18C	0	0	1	T18	3

@@ -1,0 +1,51 @@
+params {
+    // Stage toggling
+    no_qc = false
+
+    // Default raw library parameters
+    info_filename_column_index = 1
+    info_label_column_index = 2
+    info_plasmid_column_index = 3
+    info_control_column_index = 4
+    info_treatment_column_index = 5
+    info_delim = "\t"
+    info_header = true
+
+    // Processed count parameters
+    processed_count_id_column_index = 1
+    processed_count_gene_column_index = 2
+    processed_counts_delim = "\t"
+    processed_counts_header = true
+
+    // Raw QC
+    raw_qc_outdir = "."
+    raw_qc_rdata = "raw_sequencing_qc.Rdata"
+
+    // Intermediate QC
+    intermediate_qc_outdir = "."
+    intermediate_qc_infile_delim = "\t"
+    intermediate_qc_infile_header = true
+    intermediate_qc_outfile = "intermediate_summary.tsv"
+    intermediate_qc_rdata = "intermediate_qc.Rdata"
+
+    // BAGEL classification QC
+    bagel_classification_qc_outdir = "."
+    bagel_classification_infile_delim = "\t"
+    bagel_classification_qc_infile_header = true
+    bagel_classification_qc_outfile = "bagel_classification_summary.tsv"
+    bagel_classification_qc_rdata = "intermediate_qc.Rdata"
+
+    // Essential genes
+    essential_genes = null
+    ess = params.essential_genes
+    ess_gene_column_index = 1
+    no_ess_header = true
+    ess_delim = "\t"
+
+    // Non-essential genes
+    nonessential_genes = null
+    noness = params.nonessential_genes
+    noness_gene_column_index = 1
+    no_noness_header = true
+    noness_delim = "\t"
+}

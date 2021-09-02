@@ -1,0 +1,49 @@
+params {
+    // Stage toggling
+    no_correction = false
+    no_crisprcleanr = false
+
+    // Processed count parameters
+    processed_count_id_column_index = 1
+    processed_count_gene_column_index = 2
+    processed_counts_delim = "\t"
+    processed_counts_header = true
+
+    // Processed LFC parameters
+    processed_lfc_id_column_index = 1
+    processed_lfc_gene_column_index = 2
+    processed_lfc_delim = "\t"
+    processed_lfc_header = true
+
+    // Processed library parameters
+    processed_library_id_column_index = 1
+    processed_library_gene_column_index = 2
+    processed_library_chr_column_index = 3
+    processed_library_start_column_index = 4
+    processed_library_end_column_index = 5
+    processed_library_delim = "\t"
+    processed_library_header = true
+
+    // CRISPRcleanR normalisation
+    crisprcleanr_normalisation_outdir = "."
+    crisprcleanr_normalisation_count_matrix_outfile = "count_matrix.CRISPRcleanR.normalised.tsv"
+    crisprcleanr_normalisation_fc_matrix_outfile = "fold_change_matrix.CRISPRcleanR.normalised.tsv"
+    crisprcleanr_normalisation_library_outfile = "library.CRISPRcleanR.normalised.tsv"
+    crisprcleanr_normalisation_rdata = "crisprcleanr_normalisation.Rdata"
+
+    // CRISPRcleanR correction formatting
+    crisprcleanr_formatting_outdir = "."
+    crisprcleanr_formatting_count_matrix_outfile = "count_matrix.tsv"
+    crisprcleanr_formatting_fc_matrix_outfile = "fold_change_matrix.sgrna.tsv"
+    crisprcleanr_formatting_library_outfile = "library.tsv"
+    crisprcleanr_formatting_rdata = "crisprcleanr_formatting.Rdata"
+
+    // CRISPRcleanR
+    crisprcleanr_correction_outdir = "."
+    crisprcleanr_correction_count_matrix_outfile = "count_matrix.tsv"
+    crisprcleanr_correction_lfc_matrix_outfile = "fold_change_matrix.sgRNA.tsv"
+    crisprcleanr_correction_lfc_gene_matrix_outfile = "fold_change_matrix.gene.tsv"
+    crisprcleanr_correction_library_outfile = "library.tsv"
+    crisprcleanr_correction_rdata = "crisprcleanr_correction.Rdata"
+
+}

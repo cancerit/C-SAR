@@ -1,0 +1,20 @@
+params {
+  count_matrix = false
+
+  no_mageck = false
+
+  mageck_control_indices = false
+  mageck_treatment_indices = false
+
+  mageck_normcounts_to_file = true
+  mageck_remove_zero = 'none'
+  mageck_remove_zero_threshold = 0
+
+  mageck_fdr_threshold = 0.05
+  mageck_n_genes = 10
+
+  mageck_processed_results_outdir = "."
+  mageck_processed_results_rdata = "MAGeCK_processed_results.Rdata"
+
+  mageck_extra_options = false
+}
