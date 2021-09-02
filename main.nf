@@ -18,7 +18,7 @@ def helpMessage() {
 
     The typical command for running the pipeline is as follows:
 
-      nextflow run nf-single-crispr --counts <count files> --library <library file> --info <sample mapping file>
+      nextflow run c-sar --counts <count files> --library <library file> --info <sample mapping file>
 
 
     Mandatory arguments:
@@ -28,7 +28,7 @@ def helpMessage() {
       --info                     Path to sample mapping file.
 
     Quality control:
-      --no_qc                    Don't run QC.           
+      --no_qc                    Don't run QC.
 
     Filtering:
       --no_filter                Don't run count filtering.
@@ -46,7 +46,7 @@ def helpMessage() {
     Correction:
       --no_correction            Don't run any correction packages.
       --no_crisprcleanr          Don't run CRISPRcleanR.
-      
+
     Analysis:
       --no_analysis              Don't run any analysis packages.
       --no_mageck                Don't run MAGeCK.
@@ -189,7 +189,7 @@ include { counts2matrix;
           scale_gene_log_fold_changes } from './modules/crispr_utils/common' params(params)
 
 // crispr_qc
-include { sequencing_qc; 
+include { sequencing_qc;
           intermediate_qc as intermediate_qc_gene_fc;
           intermediate_qc as intermediate_qc_gene_counts;
           intermediate_qc as intermediate_qc_sgrna_counts;
@@ -203,13 +203,13 @@ include { crisprcleanr_normalise_counts;
           crisprcleanr_correction } from './modules/CRISPRcleanR/common' params(params)
 
 // MAGeCK
-include { MAGeCK_normalisation; 
+include { MAGeCK_normalisation;
           MAGeCK_test;
           MAGeCK_process_results } from './modules/MAGeCK/common' params(params)
 
 // BAGEL2
-include { bagel_normalise_counts; 
-          BAGEL_bf as BAGEL_bf_sgrna; 
+include { bagel_normalise_counts;
+          BAGEL_bf as BAGEL_bf_sgrna;
           BAGEL_bf as BAGEL_bf_gene;
           scale_gene_BFs  } from './modules/BAGEL2/common' params(params)
 
@@ -250,8 +250,8 @@ if ( total_num_samples != ( num_plasmid_samples + num_control_samples + num_trea
 }
 
 // Set the sample totals as a list
-sample_totals = [ 'plasmid': num_plasmid_samples, 
-                  'control': num_control_samples, 
+sample_totals = [ 'plasmid': num_plasmid_samples,
+                  'control': num_control_samples,
                   'treatment': num_treatment_samples ]
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -269,82 +269,82 @@ def get_analysis_indices( sample_totals ) {
 
   def analysis_indices = [:]
   analysis_indices << [ 'total': [  'all': ( n_plasmid + n_control + n_treatment ),
-                                    'plasmid': n_plasmid, 
+                                    'plasmid': n_plasmid,
                                     'control': n_control,
                                     'treatment': n_treatment ] ]
 
-  analysis_indices << [ 'all': [  'base0': ( 0..( n_plasmid + n_control + n_treatment - 1 ) ).join( ',' ), 
+  analysis_indices << [ 'all': [  'base0': ( 0..( n_plasmid + n_control + n_treatment - 1 ) ).join( ',' ),
                                   'base1': ( 1..( n_plasmid + n_control + n_treatment ) ).join( ',' ),
                                   'base1_increment2': ( 3..( 2 + n_plasmid + n_control + n_treatment ) ).join( ',' ) ] ]
 
   if ( n_plasmid > 0 ) {
-    analysis_indices << [ 'plasmid': [  'base0': ( 0..( n_plasmid - 1 ) ).join( ',' ), 
+    analysis_indices << [ 'plasmid': [  'base0': ( 0..( n_plasmid - 1 ) ).join( ',' ),
                                         'base1': ( 1..( n_plasmid ) ).join( ',' ),
                                         'base1_increment2': ( 3..( 2 + n_plasmid ) ).join( ',' ) ] ]
   }
   if ( n_control > 0 ) {
     if ( n_plasmid == 0 ) {
-      analysis_indices << [ 'control': [  'base0': ( 0..( n_control - 1 ) ).join( ',' ), 
+      analysis_indices << [ 'control': [  'base0': ( 0..( n_control - 1 ) ).join( ',' ),
                                           'base1': ( 1..n_control ).join( ',' ),
-                                          'base1_increment2': ( 3..(2 + n_control) ).join( ',' ) ] ]  
+                                          'base1_increment2': ( 3..(2 + n_control) ).join( ',' ) ] ]
     } else {
-      analysis_indices << [ 'control': [  'base0': ( ( n_plasmid )..( n_plasmid + n_control - 1 ) ).join( ',' ), 
+      analysis_indices << [ 'control': [  'base0': ( ( n_plasmid )..( n_plasmid + n_control - 1 ) ).join( ',' ),
                                           'base1': ( ( n_plasmid + 1 )..( n_plasmid + n_control ) ).join( ',' ),
-                                          'base1_increment2': ( ( 2 + n_plasmid + 1 )..( 2 + n_plasmid + n_control ) ).join( ',' ) ] ]  
+                                          'base1_increment2': ( ( 2 + n_plasmid + 1 )..( 2 + n_plasmid + n_control ) ).join( ',' ) ] ]
     }
   }
   if ( n_treatment > 0 ) {
     if ( ( n_plasmid + n_control ) == 0 ) {
-      analysis_indices << [ 'treatment': [  'base0': ( 0..( ( n_plasmid + n_control ) - 1 ) ).join( ',' ), 
+      analysis_indices << [ 'treatment': [  'base0': ( 0..( ( n_plasmid + n_control ) - 1 ) ).join( ',' ),
                                             'base1': ( 1..( n_plasmid + n_control ) ).join( ',' ),
-                                            'base1_increment2': ( 3..( 2 + n_plasmid + n_control ) ).join( ',' ) ] ]  
+                                            'base1_increment2': ( 3..( 2 + n_plasmid + n_control ) ).join( ',' ) ] ]
     } else {
-      analysis_indices << [ 'treatment': [  'base0': ( ( n_plasmid + n_control )..( n_plasmid + n_control + n_treatment - 1 ) ).join( ',' ), 
+      analysis_indices << [ 'treatment': [  'base0': ( ( n_plasmid + n_control )..( n_plasmid + n_control + n_treatment - 1 ) ).join( ',' ),
                                             'base1': ( ( n_plasmid + n_control + 1 )..( n_plasmid + n_control + n_treatment ) ).join( ',' ),
-                                            'base1_increment2': ( ( 2 + n_plasmid + n_control + 1 )..( 2 + n_plasmid + n_control + n_treatment ) ).join( ',' ) ] ]  
+                                            'base1_increment2': ( ( 2 + n_plasmid + n_control + 1 )..( 2 + n_plasmid + n_control + n_treatment ) ).join( ',' ) ] ]
     }
   }
 
   n_contrasts = 0
   if ( n_plasmid > 0 && n_control > 0 ) {
     n_contrasts++
-    analysis_indices << [ 'control_vs_plasmid': [ 'plasmid':        [   'base0': ( 0..( n_plasmid - 1 ) ).join( ',' ), 
+    analysis_indices << [ 'control_vs_plasmid': [ 'plasmid':        [   'base0': ( 0..( n_plasmid - 1 ) ).join( ',' ),
                                                                         'base1': ( 1..( n_plasmid ) ).join( ',' ) ],
-                                                  'control':        [   'base0': ( ( n_plasmid )..( ( n_plasmid + n_control ) - 1 ) ).join( ',' ), 
+                                                  'control':        [   'base0': ( ( n_plasmid )..( ( n_plasmid + n_control ) - 1 ) ).join( ',' ),
                                                                         'base1': ( ( n_plasmid + 1 )..( n_plasmid + n_control ) ).join( ',' ) ],
-                                                  'count_lfc':      [   'base1_increment2': ( 3..( 2 + n_plasmid + n_control ) ).join( ',' ) ],              
-                                                  'lfc':            [   'base0': ( 0..( n_control - 1 ) ).join( ',' ), 
+                                                  'count_lfc':      [   'base1_increment2': ( 3..( 2 + n_plasmid + n_control ) ).join( ',' ) ],
+                                                  'lfc':            [   'base0': ( 0..( n_control - 1 ) ).join( ',' ),
                                                                         'base1': ( 1..n_control ).join( ',' ),
                                                                         'base1_increment1': ( 2..(1 + n_control) ).join( ',' ),
                                                                         'base1_increment2': ( 3..(2 + n_control) ).join( ',' ),
                                                                         'base1_scaled_lfc': ( 2..(n_control - 1) ).join( ',' ) ]
-                                                ] ]  
+                                                ] ]
   }
   if ( n_plasmid > 0 && n_treatment > 0 ) {
     n_contrasts++
-    analysis_indices << [ 'treatment_vs_plasmid': [ 'plasmid':          [   'base0': ( 0..( n_plasmid - 1 ) ).join( ',' ), 
+    analysis_indices << [ 'treatment_vs_plasmid': [ 'plasmid':          [   'base0': ( 0..( n_plasmid - 1 ) ).join( ',' ),
                                                                             'base1': ( 1..( n_plasmid ) ).join( ',' ) ],
-                                                    'treatment':        [   'base0': ( ( n_plasmid )..( ( n_plasmid + n_treatment ) - 1 ) ).join( ',' ), 
+                                                    'treatment':        [   'base0': ( ( n_plasmid )..( ( n_plasmid + n_treatment ) - 1 ) ).join( ',' ),
                                                                             'base1': ( ( n_plasmid + 1 )..( n_plasmid + n_treatment ) ).join( ',' ) ],
-                                                    'count_lfc':        [   'base1_increment2': ( 3..( 2 + n_plasmid + n_treatment ) ).join( ',' ) ], 
-                                                    'lfc':              [   'base0': ( 0..( n_treatment - 1 ) ).join( ',' ), 
+                                                    'count_lfc':        [   'base1_increment2': ( 3..( 2 + n_plasmid + n_treatment ) ).join( ',' ) ],
+                                                    'lfc':              [   'base0': ( 0..( n_treatment - 1 ) ).join( ',' ),
                                                                             'base1': ( 1..n_treatment ).join( ',' ),
                                                                             'base1_increment2': ( 3..(2 + n_treatment) ).join( ',' ),
                                                                             'base1_increment1': ( 2..(1 + n_treatment) ).join( ',' ),
-                                                                            'base1_scaled_lfc': ( 2..(n_treatment - 1) ).join( ',' ) ] ] ]  
+                                                                            'base1_scaled_lfc': ( 2..(n_treatment - 1) ).join( ',' ) ] ] ]
   }
   if ( n_control > 0 && n_treatment > 0 ) {
     n_contrasts++
-    analysis_indices << [ 'treatment_vs_control': [ 'control':          [   'base0': ( 0..( n_control - 1 ) ).join( ',' ), 
+    analysis_indices << [ 'treatment_vs_control': [ 'control':          [   'base0': ( 0..( n_control - 1 ) ).join( ',' ),
                                                                             'base1': ( 1..( n_control ) ).join( ',' ) ],
-                                                    'treatment':        [   'base0': ( ( n_control )..( ( n_control + n_treatment ) - 1 ) ).join( ',' ), 
+                                                    'treatment':        [   'base0': ( ( n_control )..( ( n_control + n_treatment ) - 1 ) ).join( ',' ),
                                                                             'base1': ( ( n_control + 1 )..( n_control + n_treatment ) ).join( ',' ) ],
                                                     'count_lfc':        [   'base1_increment2': ( 3..( 2 + n_control + n_treatment ) ).join( ',' ) ],
-                                                    'lfc':              [   'base0': ( 0..( n_treatment - 1 ) ).join( ',' ), 
+                                                    'lfc':              [   'base0': ( 0..( n_treatment - 1 ) ).join( ',' ),
                                                                             'base1': ( 1..n_treatment ).join( ',' ),
                                                                             'base1_increment2': ( 3..(2 + n_treatment) ).join( ',' ),
                                                                             'base1_increment1': ( 2..(1 + n_treatment) ).join( ',' ),
-                                                                            'base1_scaled_lfc': ( 2..(n_treatment - 1) ).join( ',' ) ] ] ]  
+                                                                            'base1_scaled_lfc': ( 2..(n_treatment - 1) ).join( ',' ) ] ] ]
   }
   analysis_indices <<  [ 'n_contrasts': n_contrasts ]
   return analysis_indices
@@ -375,17 +375,17 @@ if ( num_control_samples == 0 && num_plasmid_samples == 0 ) {
   // Cannot normalise with CRISPRcleanR as normalisation and LFC calculations are in same function
   if ( params.normalisation_method == 'crisprcleanr' ) {
     printErr("CRISPRcleanR cannot be used for normalisation when there are no plasmid or control samples.")
-	  exit 1  
+	  exit 1
   }
   // Cannot run correction
   if ( !params.no_correction ) {
     printErr("Cannot perform correction when there are no plasmid or control samples.")
-	  exit 1 
+	  exit 1
   }
   //Cannot run analyses
   if ( !params.no_analysis ) {
     printErr("Cannot run analyses when there are no plasmid or control samples.")
-	  exit 1 
+	  exit 1
   }
 }
 
@@ -473,7 +473,7 @@ if ( params.no_analysis ) {
   summary['MAGeCK']        = !params.no_mageck
   if ( !params.no_mageck ) {
     summary['MAGeCK normalised counts to file']         = params.mageck_normcounts_to_file
-    summary['MAGeCK remove zero/low counts']            = params.mageck_remove_zero 
+    summary['MAGeCK remove zero/low counts']            = params.mageck_remove_zero
     summary['MAGeCK remove zero/low count threshold ']  = params.mageck_remove_zero_threshold
     summary['MAGeCK extra options']                     = params.mageck_extra_options
   }
@@ -539,7 +539,7 @@ workflow  intermediate_qc_per_stage {
       matrices
       sample_mapping
       analysis_indices
-    
+
     main:
       intermediate_qc_gene_fc( matrices.combine(sample_mapping), analysis_indices, 'fc' )
       intermediate_qc_sgrna_counts( matrices.combine(sample_mapping), analysis_indices, 'counts' )
@@ -603,7 +603,7 @@ workflow raw_filter {
 
   emit:
     filtered_counts
-    excluded_guides 
+    excluded_guides
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -624,9 +624,9 @@ workflow normalisation {
 
     if ( params.normalisation_method == 'crisprcleanr' ) {
       if ( num_plasmid_samples == 0 && num_control_samples == 0 ) {
-        // Cannot run CRISPRcleanR with only one sample type as it generates fold changes 
+        // Cannot run CRISPRcleanR with only one sample type as it generates fold changes
         printErr("CRISPRcleanR cannot be used for normalisation when there are no plasmid or control samples.")
-	      exit 1  
+	      exit 1
       } else if ( num_plasmid_samples >= 1 ) {
         // R wrapper for CRISPRcleanR methods using plasmid samples count
         crisprcleanr_normalise_counts( count_matrix, analysis_indices['total']['plasmid'], analysis_indices["all"]['base1_increment2'] )
@@ -635,13 +635,13 @@ workflow normalisation {
         // R wrapper for CRISPRcleanR methods using control sample count
         crisprcleanr_normalise_counts( count_matrix, analysis_indices['total']['control'], analysis_indices["all"]['base1_increment2'] )
         normalised_counts = crisprcleanr_normalise_counts.out.normalised_count_matrix
-      } 
-    } else if ( params.normalisation_method =~ /^mageck/ ) { 
+      }
+    } else if ( params.normalisation_method =~ /^mageck/ ) {
       // Get MAGeCK normalisation method from parameter string
-      mageck_norm_method = params.normalisation_method.split('_')[1] 
+      mageck_norm_method = params.normalisation_method.split('_')[1]
       normalised_counts = MAGeCK_normalisation( count_matrix, mageck_norm_method, analysis_indices['treatment']['base0'] )
     } else if ( params.normalisation_method == 'bagel' ) {
-      // Rscript which has been derived from BAGEL2 normalisation methods 
+      // Rscript which has been derived from BAGEL2 normalisation methods
       bagel_normalise_counts( count_matrix, analysis_indices["all"]["base1_increment2"] )
       normalised_counts = bagel_normalise_counts.out.normalised_count_matrix
     }
@@ -660,18 +660,18 @@ workflow CRISPRcleanR {
     all_matrices
     analysis_indices
 
-  main:   
+  main:
     if ( analysis_indices["total"]["plasmid"] == 0 && analysis_indices["total"]["control"] == 0 ) {
       // Cannot run CRISPRcleanR with only one sample type
       printErr("CRISPRcleanR cannot be used for normalisation when there are no plasmid or control samples.")
-      exit 1  
+      exit 1
     }
     // We only want to run this on the output files from the last stage
     matrices_for_correction = all_matrices.buffer( size: analysis_indices["n_contrasts"] ).last().flatMap{n -> n}
 
     // Format the library, count matrix and fold change matrix for CRISPRcleanR
     formatted_input = format_library_and_matrices_for_crisprcleanr( matrices_for_correction, analysis_indices )
-    
+
     // Run CRISPRcleanR
     crisprcleanr_sgrna_fold_changes = crisprcleanr_correction( formatted_input.inputdata, 'corrected', analysis_indices )
 
@@ -754,7 +754,7 @@ workflow {
 
     // Get column indices (0-based and 1-based) of sample types for count matrices
     analysis_indices = get_analysis_indices( sample_totals )
-    
+
     if (params.count_type == "single") {
         // Prepare count matrix from individual sample counts
         count_matrices = count_matrices.mix( counts2matrix( counts_directory, library, sample_mapping ).data )
@@ -762,10 +762,10 @@ workflow {
         // Prepare count matrix from individual sample counts
         count_matrices = count_matrices.mix( read_count_matrix( counts_directory, library, sample_mapping ).data )
     }
-    
+
     // Sequencing QC (only run on raw counts)
     sequencing_qc( count_matrices.filter( ~/.*raw.*/ ), sample_mapping, analysis_indices["all"]["base1_increment2"])
- 
+
     // Remove unwanted guides
     ( user_removed_counts, user_removed_guides ) = remove_user_defined_guides( count_matrices.last(), analysis_indices["all"]["base1_increment2"] )
     count_matrices = count_matrices.mix( user_removed_counts )
@@ -802,7 +802,7 @@ workflow {
     corrected_contrasts = CRISPRcleanR( contrast_combined_count_and_fold_change_matrices, analysis_indices )
     contrast_combined_count_and_fold_change_matrices = contrast_combined_count_and_fold_change_matrices.mix( corrected_contrasts )
 
-    // Intermediate QC 
+    // Intermediate QC
     intermediate_qc_per_stage( contrast_combined_count_and_fold_change_matrices, sample_mapping, analysis_indices )
 
     // Scale LFCs

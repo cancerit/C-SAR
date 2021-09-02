@@ -1,4 +1,4 @@
-# nf-single-crispr
+# c-sar
 
 ## Version numbers
 
@@ -51,4 +51,4 @@ git commit -m "Updated rcrispr submodule to ${TAG_OR_COMMITREF}" submodules/rcri
 
 ### CRISPRcleanR v1.2.1
 
-The version of CRISPRcleanR in the GitHub [DESCRIPTION](https://github.com/francescojm/CRISPRcleanR/blob/master/DESCRIPTION) does not match the latest release version [1.2.1](https://github.com/francescojm/CRISPRcleanR/releases/tag/v2.2.1) which is defined in [build/install_R_packages.sh](https://gitlab.internal.sanger.ac.uk/casm/team113/nextflow_pipeines/nf-single-crispr/-/blob/develop/build/install_R_packages.sh).
+The version of CRISPRcleanR in the GitHub [DESCRIPTION](https://github.com/francescojm/CRISPRcleanR/blob/master/DESCRIPTION) does not match the latest release version [1.2.1](https://github.com/francescojm/CRISPRcleanR/releases/tag/v2.2.1) which is defined in [build/install_R_packages.sh](https://gitlab.internal.sanger.ac.uk/casm/team113/nextflow_pipeines/c-sar/-/blob/develop/build/install_R_packages.sh).

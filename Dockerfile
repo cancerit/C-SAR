@@ -104,14 +104,14 @@ ENV DISPLAY=:0
 
 RUN mkdir -p $OPT
 COPY --from=builder $OPT $OPT
-RUN mkdir $OPT/nf-single-crispr
-COPY . $OPT/nf-single-crispr
+RUN mkdir $OPT/c-sar
+COPY . $OPT/c-sar
 
 # Copy RCRISPR scripts into pipeline bin directory
-RUN ln -s $OPT/nf-single-crispr/submodules/rcrispr/exec/*.R $OT/bin/
+RUN ln -s $OPT/c-sar/submodules/rcrispr/exec/*.R $OPT/bin/
 
 # sort out permissions
-RUN find $OPT/nf-single-crispr -exec chmod +rx {} \;
+RUN find $OPT/c-sar -exec chmod +rx {} \;
 
 RUN adduser --disabled-password --gecos '' ubuntu && chsh -s /bin/bash && mkdir -p /home/ubuntu
 USER ubuntu
@@ -119,6 +119,6 @@ USER ubuntu
 WORKDIR /home/ubuntu
 
 # ENV NXF_HOME
-# ENTRYPOINT ["nextflow", "run", "/opt/wsi-t113/nf-single-crispr/main.nf"]
+# ENTRYPOINT ["nextflow", "run", "/opt/wsi-t113/c-sar/main.nf"]
 
 CMD ["/bin/bash"]
