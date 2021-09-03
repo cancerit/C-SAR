@@ -1,10 +1,10 @@
 # Example dataset: Baggen et al. 2021
 
-In 2021, Baggen et al. performed a genome-wide CRISPR screen on SARS-CoV-2 infected human Huh7 cells, transfected with the Brunello lentiCRISPRv2 library to identify host factors for infection. 
+In 2021, Baggen et al. performed a genome-wide CRISPR screen on SARS-CoV-2 infected human Huh7 cells, transfected with the Brunello lentiCRISPRv2 library to identify host factors for infection.
 
-> Baggen, J., Persoons, L., Vanstreels, E. et al.   
->Nat Genet 53, 435–444 (2021).    
->https://doi.org/10.1038/s41588-021-00805-2   
+> Baggen, J., Persoons, L., Vanstreels, E. et al.
+> Nat Genet 53, 435–444 (2021).
+> https://doi.org/10.1038/s41588-021-00805-2
 
 ## Analysing the example dataset with C-SAR
 
@@ -40,7 +40,7 @@ c-sar -c ${ANALYSIS_DIR}/baggen_low_stringency.config -w ${ANALYSIS_DIR}/work
 
 ### Download FASTQ from SRA
 
-FASTQ files for the relevant samples were downloaded from the SRA using [SRA-toolkit version 2.11.0](https://github.com/ncbi/sra-tools/archive/refs/tags/2.11.0.tar.gz). 
+FASTQ files for the relevant samples were downloaded from the SRA using [SRA-toolkit version 2.11.0](https://github.com/ncbi/sra-tools/archive/refs/tags/2.11.0.tar.gz).
 
 Once installed, to download the relevant FASTQ files (listed in `sra-accessions.csv`):
 
@@ -104,13 +104,13 @@ Pre-quantification, a small modification to the FASTQ read headers is required (
 
 ```
 mkdir ${ANALYSIS_DIR}/reformatted_fastqs
-for i in ${ANALYSIS_DIR}/fastq/*; do 
+for i in ${ANALYSIS_DIR}/fastq/*; do
     f=$(basename "$i")
-    zcat $i | sed "s/ /:/g" | sed "s/length=151/0000:00000:00000/g" > "${ANALYSIS_DIR}reformatted_fastq/$f"; 
+    zcat $i | sed "s/ /:/g" | sed "s/length=151/0000:00000:00000/g" > "${ANALYSIS_DIR}reformatted_fastq/$f";
 done
 ```
 
-This will write the reformatted FASTQ files to `reformatted_fastq`. 
+This will write the reformatted FASTQ files to `reformatted_fastq`.
 
 #### Quantifying samples with pyCROQUET
 
