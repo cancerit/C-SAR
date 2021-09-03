@@ -1,19 +1,19 @@
 version: 2.1
 
 jobs:
-  # license_chk:
-  #   machine:
-  #     # need machine as want to mount a volume
-  #     image: ubuntu-2004:202107-02
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Execute skywalking-eyes check of licenses
-  #         # once 0.2.0 released change image
-  #         command: |
-  #           set -e
-  #           echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
-  #           docker run --rm -v $(pwd):/github/workspace ghcr.io/apache/skywalking-eyes/license-eye@sha256:17a4e86591c9908c8e76531943d5522881a82a33580ad7bdf36938517ef25aa9 header check
+  license_chk:
+    machine:
+      # need machine as want to mount a volume
+      image: ubuntu-2004:202107-02
+    steps:
+      - checkout
+      - run:
+          name: Execute skywalking-eyes check of licenses
+          # once 0.2.0 released change image
+          command: |
+            set -e
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
+            docker run --rm -v $(pwd):/github/workspace ghcr.io/apache/skywalking-eyes/license-eye header check
   build_docker:
     machine:
       image: ubuntu-2004:202107-02
@@ -45,13 +45,15 @@ workflows:
   version: 2.1
   build_test_publish:
     jobs:
-      # - license_chk:
-      #     context:
-      #       - dockerhub-casmservice
+      - license_chk:
+          context:
+            - dockerhub-casmservice
       - build_docker:
           context:
             - dockerhub-casmservice
             - quayio-casmservice
+          requires:
+            - license_chk
           filters:
             tags:
               only: /.+/

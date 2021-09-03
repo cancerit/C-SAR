@@ -80,7 +80,7 @@ Expected workflow:
 
 ```bash
 # recent build, change to apache/skywalking-eyes:0.2.0 once released
-export DOCKER_IMG=ghcr.io/apache/skywalking-eyes/license-eye@sha256:17a4e86591c9908c8e76531943d5522881a82a33580ad7bdf36938517ef25aa9
+export DOCKER_IMG=ghcr.io/apache/skywalking-eyes/license-eye
 ```
 
 1. Check state before modifying `.licenserc.yaml`:
