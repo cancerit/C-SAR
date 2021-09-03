@@ -58,7 +58,7 @@ COPY build/install_R_packages.sh build/install_R_packages.sh
 RUN bash build/install_R_packages.sh
 
 COPY build/install_R_submodules.sh build/install_R_submodules.sh
-COPY submodules/rcrispr submodules/rcrispr
+COPY submodules/RCRISPR submodules/RCRISPR
 RUN bash build/install_R_submodules.sh
 
 COPY build/requirements.txt build/requirements.txt
@@ -108,7 +108,7 @@ RUN mkdir $OPT/c-sar
 COPY . $OPT/c-sar
 
 # Copy RCRISPR scripts into pipeline bin directory
-RUN ln -s $OPT/c-sar/submodules/rcrispr/exec/*.R $OPT/bin/
+RUN ln -s $OPT/c-sar/submodules/RCRISPR/exec/*.R $OPT/bin/
 
 # sort out permissions
 RUN find $OPT/c-sar -exec chmod +rx {} \;
