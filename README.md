@@ -39,12 +39,12 @@ see the official git documentation linked above.
 Generally submodules are only updated to specific commits and tags.  To change which commit your branch refers to:
 
 ```bash
-cd submodules/rcrispr
+cd submodules/RCRISPR
 git checkout ${TAG_OR_COMMITREF}
 cd ../../
 git status
 # you will see the submodule is listed as dirty
-git commit -m "Updated rcrispr submodule to ${TAG_OR_COMMITREF}" submodules/rcrispr
+git commit -m "Updated RCRISPR submodule to ${TAG_OR_COMMITREF}" submodules/rcrispr
 ```
 
 ## Notes
