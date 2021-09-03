@@ -1,0 +1,3 @@
+[submodule "submodules/RCRISPR"]
+	path = submodules/RCRISPR
+	url = https://github.com/cancerit/RCRISPR
