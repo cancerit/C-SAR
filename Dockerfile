@@ -14,6 +14,7 @@ ENV VER_BAGEL="f9eedca"
 ENV VER_NEXTFLOW="21.04.3"
 
 # Run initial system updates
+# hadolint ignore=DL3008
 RUN apt-get update && \
   apt-get install -yq --no-install-recommends lsb-release && \
   apt-get update && \
@@ -36,7 +37,9 @@ RUN apt-get update && \
   python3-venv \
   default-jre \
   git \
-  curl
+  curl \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV OPT /opt/wsi-t113
 
@@ -44,15 +47,18 @@ ENV VIRTUAL_ENV=$OPT/python3
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$OPT/bin:$PATH"
 
+ENV BUILD /build
 ENV LD_LIBRARY_PATH $OPT/lib
 # relying on virtualenv more than this
 ENV PYTHONPATH="/usr/src/app:${PYTHONPATH}"
 ENV R_LIBS $OPT/R-lib
 ENV R_LIBS_USER $R_LIBS
 
-RUN pip3 install --upgrade pip
+# hadolint ignore=DL3013
+RUN mkdir -p $BUILD $R_LIBS_USER \
+  && pip3 install --no-cache-dir --upgrade pip
 
-RUN mkdir -p $R_LIBS_USER
+WORKDIR $BUILD
 
 COPY build/install_R_packages.sh build/install_R_packages.sh
 RUN bash build/install_R_packages.sh
@@ -71,8 +77,9 @@ LABEL maintainer="Victoria Offord <vo1@sanger.ac.uk>" \
       version="1.2.0" \
       description="Nextflow Single CRISPR pipeline container"
 
-RUN apt-get -yq update
-RUN apt-get install -yq --no-install-recommends \
+# hadolint ignore=DL3008
+RUN apt-get -yq update \
+  && apt-get install -yq --no-install-recommends \
   python3 \
   python3-distutils \
   libblas-dev \
@@ -84,7 +91,9 @@ RUN apt-get install -yq --no-install-recommends \
   unattended-upgrades && \
   unattended-upgrade -d -v && \
   apt-get remove -yq unattended-upgrades && \
-  apt-get autoremove -yq
+  apt-get autoremove -yq \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV OPT /opt/wsi-t113
 
@@ -108,17 +117,14 @@ RUN mkdir $OPT/c-sar
 COPY . $OPT/c-sar
 
 # Copy RCRISPR scripts into pipeline bin directory
-RUN ln -s $OPT/c-sar/submodules/RCRISPR/exec/*.R $OPT/bin/
-
 # sort out permissions
-RUN find $OPT/c-sar -exec chmod +rx {} \;
+RUN ln -s $OPT/c-sar/submodules/RCRISPR/exec/*.R $OPT/bin/ \
+  && find $OPT/c-sar -exec chmod +rx {} \;
 
+# hadolint ignore=DL3059
 RUN adduser --disabled-password --gecos '' ubuntu && chsh -s /bin/bash && mkdir -p /home/ubuntu
 USER ubuntu
 
 WORKDIR /home/ubuntu
-
-# ENV NXF_HOME
-# ENTRYPOINT ["nextflow", "run", "/opt/wsi-t113/c-sar/main.nf"]
 
 CMD ["/bin/bash"]

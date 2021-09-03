@@ -78,7 +78,7 @@ params {
     raw_filter_library_outfile = "library.filtered_guides_removed.tsv"
     raw_filter_outfile = "filtered_guides.tsv"
     raw_filter_rdata = "filtered_guides.Rdata"
-    min_reads = 30  
+    min_reads = 30
 
     // Coordinate filtering
     coord_filter_outdir = "."

@@ -44,7 +44,7 @@ process sequencing_qc {
         cmd = "${cmd} --info_treatment_column_index ${params.info_treatment_column_index}"
         cmd = ( params.info_group_column_index ) ? "${cmd} --info_group_column_index ${params.info_group_column_index}" : cmd
         cmd = ( params.info_reads_column_index ) ? "${cmd} --info_reads_column_index ${params.info_reads_column_index}" : cmd
-        
+
         cmd = "${cmd} --outdir \"${params.raw_qc_outdir}\""
         cmd = "${cmd} --rdata \"${params.raw_qc_rdata}\""
 
@@ -68,8 +68,8 @@ process intermediate_qc {
 
     input:
       tuple val( input_analysis_stage ), val( contrast ), file( library ), file( fc_input_count_matrix ), file( count_matrix ), file( sgrna_fold_change_matrix ), file( gene_fold_change_matrix ), file( sample_mapping )
-      val( analysis_indices )  
-      val( counts_or_fc )  
+      val( analysis_indices )
+      val( counts_or_fc )
 
     output:
       path "*.png"
@@ -98,7 +98,7 @@ process intermediate_qc {
             }
             infile_gene_column_index = 1
         }
- 
+
         script_path = "${baseDir}/submodules/rcrispr/exec/intermediate_qc.R"
 
         cmd = "${params.rscript_exec} ${script_path}"
@@ -149,8 +149,8 @@ process intermediate_bagel_classification_qc {
 
     input:
       tuple val( input_analysis_stage ), val( contrast ), file( library ), file( fc_input_count_matrix ), file( count_matrix ), file( sgrna_fold_change_matrix ), file( gene_fold_change_matrix ), file( sample_mapping )
-      val( analysis_indices )  
-      val( counts_or_fc )  
+      val( analysis_indices )
+      val( counts_or_fc )
 
     output:
       path "*.png"
@@ -179,7 +179,7 @@ process intermediate_bagel_classification_qc {
             }
             infile_gene_column_index = 1
         }
- 
+
         script_path = "${baseDir}/submodules/rcrispr/exec/bagel_classification_qc.R"
 
         cmd = "${params.rscript_exec} ${script_path}"

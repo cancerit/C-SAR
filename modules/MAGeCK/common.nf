@@ -16,7 +16,7 @@ process MAGeCK_normalisation {
 
   output:
     tuple val( 'normalised' ), path( "${analysis_name}.normalised.tsv" ), path( library ), emit: normalised_count_matrix
-  
+
   when:
     !no_normalisation
 
@@ -31,15 +31,15 @@ process MAGeCK_normalisation {
 
     cmd = "${cmd} --norm-method ${norm_method}"
     cmd = "${cmd} --normcounts-to-file"
-    
+
     cmd = "${cmd} --remove-zero none"
     cmd = "${cmd} --remove-zero-threshold 0"
-    
+
     cmd = (params.mageck_extra_options) ? "${cmd} ${params.mageck_extra_options}" : cmd
 
     """
     $cmd
-  
+
     mv "${analysis_name}.normalized.txt" "${analysis_name}.normalised.tsv"
     """
 }

@@ -1,11 +1,15 @@
 # c-sar
 
+[![cancerit](https://circleci.com/gh/cancerit/c-sar.svg?style=svg)](https://circleci.com/gh/cancerit/c-sar)
+
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
 ## Version numbers
 
 The version is in 2 files, please ensure it is updated on each release:
 
-* `Dockerfile`
-* `nextflow.config`
+- `Dockerfile`
+- `nextflow.config`
 
 ## Submodules
 
@@ -45,6 +49,18 @@ cd ../../
 git status
 # you will see the submodule is listed as dirty
 git commit -m "Updated RCRISPR submodule to ${TAG_OR_COMMITREF}" submodules/rcrispr
+```
+
+### pre-commit
+
+Please install a pre-commit to your user environment (not a venv):
+
+```bash
+curl https://pre-commit.com/install-local.py | python3 -
+# may need to add to PATH
+
+# in repo folder, enable pre-commit hooks
+pre-commit install
 ```
 
 ## Notes

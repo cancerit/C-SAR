@@ -43,7 +43,7 @@ process counts2matrix {
       cmd = "${cmd} --library_chr_column_index ${params.library_chr_column_index}"
       cmd = "${cmd} --library_start_column_index ${params.library_start_column_index}"
       cmd = "${cmd} --library_end_column_index ${params.library_end_column_index}"
-     
+
       cmd = ( params.info_header ) ? cmd : "${cmd} --no_info_header"
       cmd = "${cmd} --info_delim \"${params.info_delim}\""
       cmd = "${cmd} --info_filename_column_index ${params.info_filename_column_index}"
@@ -102,7 +102,7 @@ process read_count_matrix {
       cmd = "${cmd} --library_chr_column_index ${params.library_chr_column_index}"
       cmd = "${cmd} --library_start_column_index ${params.library_start_column_index}"
       cmd = "${cmd} --library_end_column_index ${params.library_end_column_index}"
-     
+
       cmd = ( params.info_header ) ? cmd : "${cmd} --no_info_header"
       cmd = "${cmd} --info_delim \"${params.info_delim}\""
       cmd = "${cmd} --info_filename_column_index ${params.info_filename_column_index}"
@@ -167,7 +167,7 @@ process remove_user_defined_guides {
 
     """
     $cmd
-    """  
+    """
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -223,7 +223,7 @@ process remove_duplicate_guides {
 
     """
     $cmd
-    """  
+    """
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -323,7 +323,7 @@ process remove_guides_with_no_coordinates {
     cmd = "${cmd} --library_outfile \"${params.coord_filter_library_outfile}\""
     cmd = "${cmd} --excluded_guides_outfile \"${params.coord_filter_outfile}\""
     cmd = "${cmd} --rdata \"${params.coord_filter_rdata}\""
-    
+
     cmd = "${cmd} --count_id_column_index ${params.processed_count_id_column_index}"
     cmd = "${cmd} --count_gene_column_index ${params.processed_count_gene_column_index}"
     cmd = "${cmd} --count_count_column_index ${count_indices}"
@@ -362,7 +362,7 @@ process calculate_log_fold_changes {
 
   output:
     tuple val( analysis_stage ), val( contrast ), path( library ), path( count_matrix ), path( "count_matrix.lfc.${contrast}.${analysis_stage}.tsv" ), path( "fold_change_matrix.sgrna.lfc.${contrast}.${analysis_stage}.tsv" ), path( "fold_change_matrix.gene.lfc.${contrast}.${analysis_stage}.tsv" ), emit: contrast_fold_changes
-    //tuple val( analysis_stage ), path( "calculate_log_fc.lfc.${contrast}.${analysis_stage}.Rdata" ), emit: rdata 
+    //tuple val( analysis_stage ), path( "calculate_log_fc.lfc.${contrast}.${analysis_stage}.Rdata" ), emit: rdata
 
   script:
     script_path = "${baseDir}/submodules/rcrispr/exec/calculate_log_fold_changes.R"
@@ -439,7 +439,7 @@ process scale_gene_log_fold_changes {
     } else {
       contrast_to_split = contrast
       (contrast_treatment, contrast_control) = contrast_to_split.split("_vs_", 2 )
-      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1_scaled_lfc"]      
+      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1_scaled_lfc"]
     }
 
     cmd = "${params.rscript_exec} ${script_path}"

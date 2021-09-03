@@ -19,10 +19,10 @@ process bagel_normalise_counts {
 
   when:
     params.normalisation_method == 'bagel' && !params.no_normalisation
-  
+
   script:
     script_path = "${baseDir}/submodules/rcrispr/exec/BAGEL_normalisation.R"
-  
+
     cmd = "${params.rscript_exec} ${script_path} -c ${count_matrix}"
 
     cmd = "${cmd} --outdir \"${params.bagel_normalisation_outdir}\""
@@ -71,9 +71,9 @@ process BAGEL_bf {
     if ( input_analysis_stage == 'corrected' ) {
       treatment_index_values = 7
     } else {
-      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1"]      
+      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1"]
     }
-    
+
     output_filename = "${analysis_name}.bf"
 
     cmd = "${exec_name} -i ${sgrna_fold_change_matrix}"

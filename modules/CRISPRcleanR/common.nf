@@ -24,10 +24,10 @@ process crisprcleanr_normalise_counts {
 
   when:
     !params.no_normalisation && params.normalisation_method == 'crisprcleanr'
-  
+
   script:
     script_path = "${baseDir}/submodules/rcrispr/exec/CRISPRcleanR_normalisation.R"
-  
+
     cmd = "${params.rscript_exec} ${script_path}"
     cmd = "${cmd} -c ${count_matrix}"
     cmd = "${cmd} -l ${library}"
@@ -53,7 +53,7 @@ process crisprcleanr_normalise_counts {
     cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
-     
+
 
     """
     $cmd
@@ -138,21 +138,21 @@ process crisprcleanr_correction {
 
   publishDir "${params.resultDir}/corrected/CRISPRcleanR/output", mode: 'copy', pattern: "*CRISPRcleanR_corrected*", overwrite: true
   //publishDir "${params.resultDir}/corrected/CRISPRcleanR/output", mode: 'copy', pattern: "*.Rdata", overwrite: true
-  
+
   input:
     tuple val( input_analysis_stage ), val( contrast ), file( library ), file( fc_input_count_matrix ), file( count_matrix ), path( sgrna_fold_change_matrix ), path( gene_fold_change_matrix )
     val( analysis_stage )
     val(analysis_indices)
-  
-  output: 
+
+  output:
     tuple val( analysis_stage ), val( contrast ), file( library ), file( fc_input_count_matrix ), file( "count_matrix.${file_suffix}.tsv" ), file( "fold_change_matrix.sgRNA.${file_suffix}.tsv" ), file( "fold_change_matrix.gene.${file_suffix}.tsv" ), emit: fold_change_matrix
 
   when:
-    !params.no_correction && !params.no_crisprcleanr    
+    !params.no_correction && !params.no_crisprcleanr
 
   script:
     script_path = "${baseDir}/submodules/rcrispr/exec/CRISPRcleanR_correction.R"
-    file_suffix = "CRISPRcleanR_corrected.${contrast}.${analysis_stage}" 
+    file_suffix = "CRISPRcleanR_corrected.${contrast}.${analysis_stage}"
     count_indices = analysis_indices["${contrast}"]["count_lfc"]["base1_increment2"]
     lfc_indices = analysis_indices["${contrast}"]["lfc"]["base1_increment2"]
 
