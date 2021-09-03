@@ -1,0 +1,6 @@
+Run	BioProject	BioSample	Experiment	Name	Label	Filename	CountFilename	plasmid	control	treatment	group	reads
+SRR13255547	PRJNA685335	SAMN17083046	SRX9686498	Brunello_genome-wide_library_lentiCRISPRv2	plasmid_library	SRR13255547.fastq.gz	SRR13255547.counts.tsv	1	0	0	plasmid	17149719
+SRR13255540	PRJNA685335	SAMN17083053	SRX9686505	low_stringency_-_uninfected_repl_A	uninfected_repl_A	SRR13255540.fastq.gz	SRR13255540.counts.tsv	0	1	0	uninfected	2484605
+SRR13255539	PRJNA685335	SAMN17083054	SRX9686506	low_stringency_-_uninfected_repl_B	uninfected_repl_B	SRR13255539.fastq.gz	SRR13255539.counts.tsv	0	1	0	uninfected	3069577
+SRR13255542	PRJNA685335	SAMN17083051	SRX9686503	low_stringency_-_SARS-CoV-2_repl_A	SARS-CoV-2_repl_A	SRR13255542.fastq.gz	SRR13255542.counts.tsv	0	0	1	SARS-CoV-2	3622461
+SRR13255541	PRJNA685335	SAMN17083052	SRX9686504	low_stringency_-_SARS-CoV-2_repl_B	SARS-CoV-2_repl_B	SRR13255541.fastq.gz	SRR13255541.counts.tsv	0	0	1	SARS-CoV-2	3289811
