@@ -13,7 +13,7 @@ In 2021, Baggen et al. performed a genome-wide CRISPR screen on SARS-CoV-2 infec
 To run [C-SAR](https://github.com/cancerit/C-SAR) on the example dataset, you will first need to clone the C-SAR repository:
 
 ```
-git clone https://github.com/cancerit/C-SAR.git
+git clone --recurse-submodules --branch main https://github.com/cancerit/C-SAR.git
 ```
 
 ### Set path for example directory
@@ -92,6 +92,8 @@ id	sgrna_ids	sgrna_seqs	gene_pair_id
 5	A2M_1	ACTGCATCTGTGCAAACGGG	A2M
 ```
 
+It's essentially the pyCROQUET-formatted library with the headers stripped to leave a single header row. In the C-SAR configuration file  (`baggen_low_stringency.config`) we use `library_id_column_index = 2` and `library_gene_column_index = 4` to tell C-SAR that the guide identifiers and genes are in column 2 and 4 respectively.
+
 ### Quantification with pyCROQUET
 
 #### Formatting FASTQ for use with pyCROQUET
@@ -115,8 +117,10 @@ This will write the reformatted FASTQ files to `reformatted_fastq`.
 Below is an example pyCROQUET command for SRR13255539:
 
 ```
-pycroquet single-guide -g ${ANALYSIS_DIR}/Brunello_library_Baggen_SupplTable3.reformatted.tsv -q ${ANALYSIS_DIR}/reformatted_fastq/SRR13255539.fastq.gz -s SRR13255539 -o ${ANALYSIS_DIR}/counts/SRR13255539 -n -c 32"
+pycroquet single-guide -g ${ANALYSIS_DIR}/Brunello_library_Baggen_SupplTable3.reformatted.tsv -q ${ANALYSIS_DIR}/reformatted_fastq/SRR13255539.fastq.gz -s SRR13255539 -o ${ANALYSIS_DIR}/counts/SRR13255539 -n"
 ```
+
+To run with multiple CPU, add `-c <cpu>`> to the command above e.g. `-c 4` to use 4 CPUs.
 
 ### Essential and non-essential gene lists
 
