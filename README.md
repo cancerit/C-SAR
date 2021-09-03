@@ -1,6 +1,6 @@
 # c-sar
 
-[![cancerit](https://circleci.com/gh/cancerit/c-sar.svg?style=svg)](https://circleci.com/gh/cancerit/c-sar)
+[![cancerit](https://circleci.com/gh/cancerit/C-SAR.svg?style=svg)](https://circleci.com/gh/cancerit/C-SAR)
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
