@@ -81,7 +81,7 @@ The library used with pyCROQUET is `Brunello_library_Baggen_SupplTable3.reformat
 
 #### C-SAR
 
-The library used with pyCROQUET is `Brunello_library_Baggen_SupplTable3.reformatted.csar.tsv` which has the following format:
+The library used with C-SAR is `Brunello_library_Baggen_SupplTable3.reformatted.csar.tsv` which has the following format:
 
 ```
 id	sgrna_ids	sgrna_seqs	gene_pair_id
