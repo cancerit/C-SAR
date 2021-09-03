@@ -4,14 +4,22 @@
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
-## Version numbers
+## Notes
+
+### CRISPRcleanR v1.2.1
+
+The version of CRISPRcleanR in the GitHub [DESCRIPTION](https://github.com/francescojm/CRISPRcleanR/blob/master/DESCRIPTION) does not match the latest release version [1.2.1](https://github.com/francescojm/CRISPRcleanR/releases/tag/v2.2.1) which is defined in [build/install_R_packages.sh](https://gitlab.internal.sanger.ac.uk/casm/team113/nextflow_pipeines/c-sar/-/blob/develop/build/install_R_packages.sh).
+
+## Developer notes
+
+### Version numbers
 
 The version is in 2 files, please ensure it is updated on each release:
 
 - `Dockerfile`
 - `nextflow.config`
 
-## Submodules
+### Submodules
 
 This project has a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to make it easier to build the docker
 image.  The initial checkout needs to be done via recursive strategy:
@@ -32,13 +40,13 @@ git pull
 git submodule update --init --recursive
 ```
 
-### Editing the submodule
+#### Editing the submodule
 
 You can edit a submodule directly in this checkout and commit back to the original repository, however it is generally
 less confusing to consider the submodule as a read-only component.  If you want to push changes made in this way please
 see the official git documentation linked above.
 
-### Updating the submodule
+#### Updating the submodule
 
 Generally submodules are only updated to specific commits and tags.  To change which commit your branch refers to:
 
@@ -63,8 +71,62 @@ curl https://pre-commit.com/install-local.py | python3 -
 pre-commit install
 ```
 
-## Notes
+### Updating licence headers
 
-### CRISPRcleanR v1.2.1
+Please use [skywalking-eyes](https://github.com/apache/skywalking-eyes).
 
-The version of CRISPRcleanR in the GitHub [DESCRIPTION](https://github.com/francescojm/CRISPRcleanR/blob/master/DESCRIPTION) does not match the latest release version [1.2.1](https://github.com/francescojm/CRISPRcleanR/releases/tag/v2.2.1) which is defined in [build/install_R_packages.sh](https://gitlab.internal.sanger.ac.uk/casm/team113/nextflow_pipeines/c-sar/-/blob/develop/build/install_R_packages.sh).
+Expected workflow:
+
+```bash
+# recent build, change to apache/skywalking-eyes:0.2.0 once released
+export DOCKER_IMG=ghcr.io/apache/skywalking-eyes/license-eye@sha256:17a4e86591c9908c8e76531943d5522881a82a33580ad7bdf36938517ef25aa9
+```
+
+1. Check state before modifying `.licenserc.yaml`:
+   - `docker run -it --rm -v $(pwd):/github/workspace $DOCKER_IMG header check`
+   - You should get some 'valid' here, those without a header as 'invalid'
+1. Modify `.licenserc.yaml`
+1. Apply the changes:
+   - `docker run -it --rm -v $(pwd):/github/workspace $DOCKER_IMG header fix`
+1. Add/commit changes
+
+The check is executed in the CI pipeline which will fail if expected files are missing the license.
+
+*DO NOT* edit the header in the files, please modify the date component of `content` in `.licenserc.yaml`.  The only files needing manual update being:
+
+- `README.Rmd`
+
+If you need to make more extensive changes to the license carefully test the pattern is functional.
+
+## LICENSE
+
+```
+Copyright (c) 2021 Genome Research Ltd
+
+Author: CASM/Cancer IT <cgphelp@sanger.ac.uk>
+
+This file is part of C-SAR.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+1. The usage of a range of years within a copyright statement contained within
+this distribution should be interpreted as being equivalent to a list of years
+including the first and last year specified and all consecutive years between
+them. For example, a copyright statement that reads ‘Copyright (c) 2005, 2007-
+2009, 2011-2012’ should be interpreted as being identical to a statement that
+reads ‘Copyright (c) 2005, 2007, 2008, 2009, 2011, 2012’ and a copyright
+statement that reads ‘Copyright (c) 2005-2012’ should be interpreted as being
+identical to a statement that reads ‘Copyright (c) 2005, 2006, 2007, 2008,
+2009, 2010, 2011, 2012’.
+```
