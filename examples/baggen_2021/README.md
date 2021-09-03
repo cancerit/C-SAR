@@ -18,10 +18,11 @@ git clone --recurse-submodules --branch main https://github.com/cancerit/C-SAR.g
 
 ### Set path for example directory
 
-To make the analysis location agnostic, we suggest setting an environment variable pointing at the `examples/baggen_2021` directory.
+To make the example analysis location agnostic, we *must* set an environment variable pointing at the `examples/baggen_2021` directory.
 
 ```
-ANALYSIS_DIR=<path to example directory>
+cd <REPO_BASE>
+export ANALYSIS_DIR=$PWD/examples/baggen_2021
 ```
 
 ### Running C-SAR
@@ -31,7 +32,11 @@ ANALYSIS_DIR=<path to example directory>
 Once installed, to run C-SAR:
 
 ```
+# native install
 c-sar -c ${ANALYSIS_DIR}/baggen_low_stringency.config -w ${ANALYSIS_DIR}/work
+
+# docker image
+docker run -ti --rm -v $ANALYSIS_DIR:$ANALYSIS_DIR:rw -e ANALYSIS_DIR=$ANALYSIS_DIR quay.io/wtsicgp/c-sar:?.?.? c-sar -c $ANALYSIS_DIR/baggen_low_stringency.config -w $ANALYSIS_DIR/work
 ```
 
 *Note: an internal C-SAR version (1.2.0) was used for CRISPR and Beyond: Perturbations at Scale to Underatand Genomes 2021 (available on request).*

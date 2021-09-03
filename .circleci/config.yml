@@ -21,6 +21,8 @@ jobs:
       IMAGE_NAME: quay.io/wtsicgp/c-sar
     steps:
       - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - run:
           name: Building CI image
           command: |

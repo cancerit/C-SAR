@@ -64,11 +64,10 @@ COPY build/install_R_packages.sh build/install_R_packages.sh
 RUN bash build/install_R_packages.sh
 
 COPY build/install_R_submodules.sh build/install_R_submodules.sh
-COPY submodules/RCRISPR submodules/RCRISPR
+COPY submodules/rcrispr submodules/rcrispr
 RUN bash build/install_R_submodules.sh
 
-COPY build/requirements.txt build/requirements.txt
-COPY build/opt-build.sh build/opt-build.sh
+COPY build/opt-build.sh build/requirements.txt build/
 RUN bash build/opt-build.sh $OPT
 
 FROM rocker/r-ubuntu:20.04
@@ -118,7 +117,7 @@ COPY . $OPT/c-sar
 
 # Copy RCRISPR scripts into pipeline bin directory
 # sort out permissions
-RUN ln -s $OPT/c-sar/submodules/RCRISPR/exec/*.R $OPT/bin/ \
+RUN ln -s $OPT/c-sar/submodules/rcrispr/exec/*.R $OPT/bin/ \
   && find $OPT/c-sar -exec chmod +rx {} \;
 
 # hadolint ignore=DL3059

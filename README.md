@@ -51,7 +51,8 @@ see the official git documentation linked above.
 Generally submodules are only updated to specific commits and tags.  To change which commit your branch refers to:
 
 ```bash
-cd submodules/RCRISPR
+cd submodules/rcrispr
+git pull
 git checkout ${TAG_OR_COMMITREF}
 cd ../../
 git status
