@@ -71,9 +71,9 @@ process counts2matrix {
       cmd = "${cmd} --library_delim \"${params.library_delim}\""
       cmd = "${cmd} --library_id_column_index ${params.library_id_column_index}"
       cmd = "${cmd} --library_gene_column_index ${params.library_gene_column_index}"
-      cmd = ( params.library_chr_column_index ) ? cmd : "${cmd} --library_chr_column_index ${params.library_chr_column_index}"
-      cmd = ( params.library_start_column_index ) ? cmd : "${cmd} --library_start_column_index ${params.library_start_column_index}"
-      cmd = ( params.library_end_column_index ) ? cmd : "${cmd} --library_end_column_index ${params.library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.library_end_column_index}" : cmd
 
       cmd = ( params.info_header ) ? cmd : "${cmd} --no_info_header"
       cmd = "${cmd} --info_delim \"${params.info_delim}\""
@@ -130,9 +130,9 @@ process read_count_matrix {
       cmd = "${cmd} --library_delim \"${params.library_delim}\""
       cmd = "${cmd} --library_id_column_index ${params.library_id_column_index}"
       cmd = "${cmd} --library_gene_column_index ${params.library_gene_column_index}"
-      cmd = "${cmd} --library_chr_column_index ${params.library_chr_column_index}"
-      cmd = "${cmd} --library_start_column_index ${params.library_start_column_index}"
-      cmd = "${cmd} --library_end_column_index ${params.library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.library_end_column_index}" : cmd
 
       cmd = ( params.info_header ) ? cmd : "${cmd} --no_info_header"
       cmd = "${cmd} --info_delim \"${params.info_delim}\""
@@ -190,9 +190,9 @@ process remove_user_defined_guides {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
-    cmd = "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
-    cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
@@ -246,9 +246,9 @@ process remove_duplicate_guides {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
-    cmd = "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
-    cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
@@ -309,9 +309,9 @@ process filter_counts_by_indices {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
-    cmd = "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
-    cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
@@ -363,9 +363,9 @@ process remove_guides_with_no_coordinates {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
-    cmd = "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
-    cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
@@ -470,7 +470,7 @@ process scale_gene_log_fold_changes {
     } else {
       contrast_to_split = contrast
       (contrast_treatment, contrast_control) = contrast_to_split.split("_vs_", 2 )
-      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1_scaled_lfc"]
+      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1_increment1"]
     }
 
     cmd = "${params.rscript_exec} ${script_path}"
@@ -489,7 +489,7 @@ process scale_gene_log_fold_changes {
     cmd = "${cmd} --ess_delim \"${params.ess_delim}\""
 
     cmd = "${cmd} --noness \"${params.nonessential_genes}\""
-    cmd = "${cmd} --noness_gene_column_index \"${params.noness_gene_column_index}\""
+    cmd = "${cmd} --noness_gene_column_index ${params.noness_gene_column_index}"
     cmd = "${cmd} --no_noness_header"
     cmd = "${cmd} --noness_delim \"${params.noness_delim}\""
 
