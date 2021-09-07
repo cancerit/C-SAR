@@ -1,3 +1,34 @@
+/*
+ * Copyright (c) 2021 Genome Research Ltd
+ *
+ * Author: CASM/Cancer IT <cgphelp@sanger.ac.uk>
+ *
+ * This file is part of C-SAR.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * 1. The usage of a range of years within a copyright statement contained within
+ * this distribution should be interpreted as being equivalent to a list of years
+ * including the first and last year specified and all consecutive years between
+ * them. For example, a copyright statement that reads ‘Copyright (c) 2005, 2007-
+ * 2009, 2011-2012’ should be interpreted as being identical to a statement that
+ * reads ‘Copyright (c) 2005, 2007, 2008, 2009, 2011, 2012’ and a copyright
+ * statement that reads ‘Copyright (c) 2005-2012’ should be interpreted as being
+ * identical to a statement that reads ‘Copyright (c) 2005, 2006, 2007, 2008,
+ * 2009, 2010, 2011, 2012’.
+ *
+ */
 ///////////////////////////////////////////////////////////////////////////////
 /* --                                                                     -- */
 /* --             Convert count files to matrix                           -- */
@@ -40,10 +71,10 @@ process counts2matrix {
       cmd = "${cmd} --library_delim \"${params.library_delim}\""
       cmd = "${cmd} --library_id_column_index ${params.library_id_column_index}"
       cmd = "${cmd} --library_gene_column_index ${params.library_gene_column_index}"
-      cmd = "${cmd} --library_chr_column_index ${params.library_chr_column_index}"
-      cmd = "${cmd} --library_start_column_index ${params.library_start_column_index}"
-      cmd = "${cmd} --library_end_column_index ${params.library_end_column_index}"
-     
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.library_end_column_index}" : cmd
+
       cmd = ( params.info_header ) ? cmd : "${cmd} --no_info_header"
       cmd = "${cmd} --info_delim \"${params.info_delim}\""
       cmd = "${cmd} --info_filename_column_index ${params.info_filename_column_index}"
@@ -99,10 +130,10 @@ process read_count_matrix {
       cmd = "${cmd} --library_delim \"${params.library_delim}\""
       cmd = "${cmd} --library_id_column_index ${params.library_id_column_index}"
       cmd = "${cmd} --library_gene_column_index ${params.library_gene_column_index}"
-      cmd = "${cmd} --library_chr_column_index ${params.library_chr_column_index}"
-      cmd = "${cmd} --library_start_column_index ${params.library_start_column_index}"
-      cmd = "${cmd} --library_end_column_index ${params.library_end_column_index}"
-     
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.library_end_column_index}" : cmd
+
       cmd = ( params.info_header ) ? cmd : "${cmd} --no_info_header"
       cmd = "${cmd} --info_delim \"${params.info_delim}\""
       cmd = "${cmd} --info_filename_column_index ${params.info_filename_column_index}"
@@ -159,15 +190,15 @@ process remove_user_defined_guides {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
-    cmd = "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
-    cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
     """
     $cmd
-    """  
+    """
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -215,15 +246,15 @@ process remove_duplicate_guides {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
-    cmd = "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
-    cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
     """
     $cmd
-    """  
+    """
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -278,9 +309,9 @@ process filter_counts_by_indices {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
-    cmd = "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
-    cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
@@ -323,7 +354,7 @@ process remove_guides_with_no_coordinates {
     cmd = "${cmd} --library_outfile \"${params.coord_filter_library_outfile}\""
     cmd = "${cmd} --excluded_guides_outfile \"${params.coord_filter_outfile}\""
     cmd = "${cmd} --rdata \"${params.coord_filter_rdata}\""
-    
+
     cmd = "${cmd} --count_id_column_index ${params.processed_count_id_column_index}"
     cmd = "${cmd} --count_gene_column_index ${params.processed_count_gene_column_index}"
     cmd = "${cmd} --count_count_column_index ${count_indices}"
@@ -332,9 +363,9 @@ process remove_guides_with_no_coordinates {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
-    cmd = "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
-    cmd = "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
+    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
+    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
+    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
@@ -362,7 +393,7 @@ process calculate_log_fold_changes {
 
   output:
     tuple val( analysis_stage ), val( contrast ), path( library ), path( count_matrix ), path( "count_matrix.lfc.${contrast}.${analysis_stage}.tsv" ), path( "fold_change_matrix.sgrna.lfc.${contrast}.${analysis_stage}.tsv" ), path( "fold_change_matrix.gene.lfc.${contrast}.${analysis_stage}.tsv" ), emit: contrast_fold_changes
-    //tuple val( analysis_stage ), path( "calculate_log_fc.lfc.${contrast}.${analysis_stage}.Rdata" ), emit: rdata 
+    //tuple val( analysis_stage ), path( "calculate_log_fc.lfc.${contrast}.${analysis_stage}.Rdata" ), emit: rdata
 
   script:
     script_path = "${baseDir}/submodules/rcrispr/exec/calculate_log_fold_changes.R"
@@ -439,7 +470,7 @@ process scale_gene_log_fold_changes {
     } else {
       contrast_to_split = contrast
       (contrast_treatment, contrast_control) = contrast_to_split.split("_vs_", 2 )
-      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1_scaled_lfc"]      
+      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1_increment1"]
     }
 
     cmd = "${params.rscript_exec} ${script_path}"
@@ -458,7 +489,7 @@ process scale_gene_log_fold_changes {
     cmd = "${cmd} --ess_delim \"${params.ess_delim}\""
 
     cmd = "${cmd} --noness \"${params.nonessential_genes}\""
-    cmd = "${cmd} --noness_gene_column_index \"${params.noness_gene_column_index}\""
+    cmd = "${cmd} --noness_gene_column_index ${params.noness_gene_column_index}"
     cmd = "${cmd} --no_noness_header"
     cmd = "${cmd} --noness_delim \"${params.noness_delim}\""
 

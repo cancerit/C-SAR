@@ -1,3 +1,34 @@
+/*
+ * Copyright (c) 2021 Genome Research Ltd
+ *
+ * Author: CASM/Cancer IT <cgphelp@sanger.ac.uk>
+ *
+ * This file is part of C-SAR.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ * 1. The usage of a range of years within a copyright statement contained within
+ * this distribution should be interpreted as being equivalent to a list of years
+ * including the first and last year specified and all consecutive years between
+ * them. For example, a copyright statement that reads ‘Copyright (c) 2005, 2007-
+ * 2009, 2011-2012’ should be interpreted as being identical to a statement that
+ * reads ‘Copyright (c) 2005, 2007, 2008, 2009, 2011, 2012’ and a copyright
+ * statement that reads ‘Copyright (c) 2005-2012’ should be interpreted as being
+ * identical to a statement that reads ‘Copyright (c) 2005, 2006, 2007, 2008,
+ * 2009, 2010, 2011, 2012’.
+ *
+ */
 ///////////////////////////////////////////////////////////////////////////////
 /* --                                                                     -- */
 /* --                         BAGEL normalise counts                      -- */
@@ -19,10 +50,10 @@ process bagel_normalise_counts {
 
   when:
     params.normalisation_method == 'bagel' && !params.no_normalisation
-  
+
   script:
     script_path = "${baseDir}/submodules/rcrispr/exec/BAGEL_normalisation.R"
-  
+
     cmd = "${params.rscript_exec} ${script_path} -c ${count_matrix}"
 
     cmd = "${cmd} --outdir \"${params.bagel_normalisation_outdir}\""
@@ -71,9 +102,9 @@ process BAGEL_bf {
     if ( input_analysis_stage == 'corrected' ) {
       treatment_index_values = 7
     } else {
-      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1"]      
+      treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1"]
     }
-    
+
     output_filename = "${analysis_name}.bf"
 
     cmd = "${exec_name} -i ${sgrna_fold_change_matrix}"

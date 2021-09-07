@@ -2,18 +2,19 @@
 
 ## Count matrix
 
-Count matrix (`reads_hap1.txt`) is from the hart-lab BAGEL repository (commit f9eedca):  
+Count matrix (`reads_hap1.txt`) is from the hart-lab BAGEL repository (commit f9eedca):
 
 [https://github.com/hart-lab/bagel/blob/master/reads_hap1.txt](https://github.com/hart-lab/bagel/blob/master/reads_hap1.txt)
 
 To download:
+
 ```
 curl -OJL https://raw.githubusercontent.com/hart-lab/bagel/master/reads_hap1.txt
 ```
 
-##  Library
+## Library
 
-TKOv3 can be downloaded from Addgene:  
+TKOv3 can be downloaded from Addgene:
 
 https://media.addgene.org/cms/filer_public/71/a8/71a81179-7a62-4d75-9b53-236e6f6b7d4d/tkov3_guide_sequence.xlsx
 

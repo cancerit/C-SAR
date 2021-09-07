@@ -9,9 +9,9 @@ params {
     // Default raw library parameters
     library_id_column_index = 1
     library_gene_column_index = 2
-    library_chr_column_index = 3
-    library_start_column_index = 4
-    library_end_column_index = 5
+    library_chr_column_index = false
+    library_start_column_index = false
+    library_end_column_index = false
     library_delim = "\t"
     library_header = true
 
@@ -21,6 +21,8 @@ params {
     info_plasmid_column_index = 3
     info_control_column_index = 4
     info_treatment_column_index = 5
+    info_group_column_index = false
+    info_reads_column_index = false
     info_delim = "\t"
     info_header = true
 
@@ -78,7 +80,7 @@ params {
     raw_filter_library_outfile = "library.filtered_guides_removed.tsv"
     raw_filter_outfile = "filtered_guides.tsv"
     raw_filter_rdata = "filtered_guides.Rdata"
-    min_reads = 30  
+    min_reads = 30
 
     // Coordinate filtering
     coord_filter_outdir = "."

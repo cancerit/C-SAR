@@ -1,10 +1,10 @@
 # Example dataset: Baggen et al. 2021
 
-In 2021, Baggen et al. performed a genome-wide CRISPR screen on SARS-CoV-2 infected human Huh7 cells, transfected with the Brunello lentiCRISPRv2 library to identify host factors for infection. 
+In 2021, Baggen et al. performed a genome-wide CRISPR screen on SARS-CoV-2 infected human Huh7 cells, transfected with the Brunello lentiCRISPRv2 library to identify host factors for infection.
 
-> Baggen, J., Persoons, L., Vanstreels, E. et al.   
->Nat Genet 53, 435–444 (2021).    
->https://doi.org/10.1038/s41588-021-00805-2   
+> Baggen, J., Persoons, L., Vanstreels, E. et al.
+> Nat Genet 53, 435–444 (2021).
+> https://doi.org/10.1038/s41588-021-00805-2
 
 ## Analysing the example dataset with C-SAR
 
@@ -18,10 +18,11 @@ git clone --recurse-submodules --branch main https://github.com/cancerit/C-SAR.g
 
 ### Set path for example directory
 
-To make the analysis location agnostic, we suggest setting an environment variable pointing at the `examples/baggen_2021` directory.
+To make the example analysis location agnostic, we *must* set an environment variable pointing at the `examples/baggen_2021` directory.
 
 ```
-ANALYSIS_DIR=<path to example directory>
+cd <REPO_BASE>
+export ANALYSIS_DIR=$PWD/examples/baggen_2021
 ```
 
 ### Running C-SAR
@@ -31,7 +32,11 @@ ANALYSIS_DIR=<path to example directory>
 Once installed, to run C-SAR:
 
 ```
+# native install
 c-sar -c ${ANALYSIS_DIR}/baggen_low_stringency.config -w ${ANALYSIS_DIR}/work
+
+# docker image
+docker run -ti --rm -v $ANALYSIS_DIR:$ANALYSIS_DIR:rw -e ANALYSIS_DIR=$ANALYSIS_DIR quay.io/wtsicgp/c-sar:?.?.? c-sar -c $ANALYSIS_DIR/baggen_low_stringency.config -w $ANALYSIS_DIR/work
 ```
 
 *Note: an internal C-SAR version (1.2.0) was used for CRISPR and Beyond: Perturbations at Scale to Underatand Genomes 2021 (available on request).*
@@ -40,7 +45,7 @@ c-sar -c ${ANALYSIS_DIR}/baggen_low_stringency.config -w ${ANALYSIS_DIR}/work
 
 ### Download FASTQ from SRA
 
-FASTQ files for the relevant samples were downloaded from the SRA using [SRA-toolkit version 2.11.0](https://github.com/ncbi/sra-tools/archive/refs/tags/2.11.0.tar.gz). 
+FASTQ files for the relevant samples were downloaded from the SRA using [SRA-toolkit version 2.11.0](https://github.com/ncbi/sra-tools/archive/refs/tags/2.11.0.tar.gz).
 
 Once installed, to download the relevant FASTQ files (listed in `sra-accessions.csv`):
 
@@ -104,13 +109,13 @@ Pre-quantification, a small modification to the FASTQ read headers is required (
 
 ```
 mkdir ${ANALYSIS_DIR}/reformatted_fastqs
-for i in ${ANALYSIS_DIR}/fastq/*; do 
+for i in ${ANALYSIS_DIR}/fastq/*; do
     f=$(basename "$i")
-    zcat $i | sed "s/ /:/g" | sed "s/length=151/0000:00000:00000/g" > "${ANALYSIS_DIR}reformatted_fastq/$f"; 
+    zcat $i | sed "s/ /:/g" | sed "s/length=151/0000:00000:00000/g" > "${ANALYSIS_DIR}reformatted_fastq/$f";
 done
 ```
 
-This will write the reformatted FASTQ files to `reformatted_fastq`. 
+This will write the reformatted FASTQ files to `reformatted_fastq`.
 
 #### Quantifying samples with pyCROQUET
 
