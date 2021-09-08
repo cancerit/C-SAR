@@ -63,6 +63,7 @@ process counts2matrix {
 
       cmd = ( params.counts_header ) ? cmd : "${cmd} --no_counts_header"
       cmd = "${cmd} --counts_delim \"${params.counts_delim}\""
+      cmd = "${cmd} --count_skip ${params.count_skip}"
       cmd = "${cmd} --count_id_column_index ${params.count_id_column_index}"
       cmd = "${cmd} --count_gene_column_index ${params.count_gene_column_index}"
       cmd = "${cmd} --count_count_column_index ${params.count_count_column_index}"

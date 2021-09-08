@@ -5,6 +5,7 @@ params {
     count_count_column_index = 3
     counts_delim = "\t"
     counts_header = true
+    count_skip = 0
 
     // Default raw library parameters
     library_id_column_index = 1
