@@ -40,6 +40,14 @@ git pull
 git submodule update --init --recursive
 ```
 
+#### Changing branches
+
+If you change branches you need to make sure the submodule changes with you:
+
+```bash
+git checkout --recurse-submodules $NEW_BRANCH
+```
+
 #### Editing the submodule
 
 You can edit a submodule directly in this checkout and commit back to the original repository, however it is generally
