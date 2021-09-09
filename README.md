@@ -147,3 +147,4 @@ identical to a statement that reads ‘Copyright (c) 2005, 2006, 2007, 2008,
 [circle-develop]: https://circleci.com/gh/cancerit/C-SAR.svg?style=shield&branch=dev%3B
 [circle-master]: https://circleci.com/gh/cancerit/C-SAR.svg?style=shield&branch=master%3B
 [circle-repo]: https://app.circleci.com/pipelines/github/cancerit/C-SAR
+[circle-base]: https://circleci.com/gh/cancerit/C-SAR.svg?style=shield
