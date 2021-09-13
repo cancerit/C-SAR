@@ -79,9 +79,9 @@ process crisprcleanr_normalise_counts {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
-    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
-    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
+    cmd = ( !params.library_chr_column_index ) ? cmd : "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
+    cmd = ( !params.library_start_column_index ) ? cmd : "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
+    cmd = ( !params.library_end_column_index ) ? cmd : "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
@@ -146,9 +146,9 @@ process format_library_and_matrices_for_crisprcleanr {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
-    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
-    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
+    cmd = ( !params.library_chr_column_index ) ? cmd : "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
+    cmd = ( !params.library_start_column_index ) ? cmd : "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
+    cmd = ( !params.library_end_column_index ) ? cmd : "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
@@ -214,9 +214,9 @@ process crisprcleanr_correction {
 
     cmd = "${cmd} --library_id_column_index ${params.processed_library_id_column_index}"
     cmd = "${cmd} --library_gene_column_index ${params.processed_library_gene_column_index}"
-    cmd = ( params.library_chr_column_index ) ? "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}" : cmd
-    cmd = ( params.library_start_column_index ) ? "${cmd} --library_start_column_index ${params.processed_library_start_column_index}" : cmd
-    cmd = ( params.library_end_column_index ) ? "${cmd} --library_end_column_index ${params.processed_library_end_column_index}" : cmd
+    cmd = ( !params.library_chr_column_index ) ? cmd : "${cmd} --library_chr_column_index ${params.processed_library_chr_column_index}"
+    cmd = ( !params.library_start_column_index ) ? cmd : "${cmd} --library_start_column_index ${params.processed_library_start_column_index}"
+    cmd = ( !params.library_end_column_index ) ? cmd : "${cmd} --library_end_column_index ${params.processed_library_end_column_index}"
     cmd = ( params.processed_library_header ) ? cmd : "${cmd} --no_library_header"
     cmd = "${cmd} --library_delim \"${params.processed_library_delim}\""
 
