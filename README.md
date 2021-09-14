@@ -6,6 +6,18 @@
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
+- [Notes](#notes)
+  - [CRISPRcleanR v1.2.1](#crisprcleanr-v121)
+- [Developer notes](#developer-notes)
+  - [Version numbers](#version-numbers)
+  - [Submodules](#submodules)
+    - [Changing branches](#changing-branches)
+    - [Editing the submodule](#editing-the-submodule)
+    - [Updating the submodule](#updating-the-submodule)
+  - [pre-commit](#pre-commit)
+  - [Updating licence headers](#updating-licence-headers)
+- [LICENSE](#license)
+
 ## Notes
 
 ### CRISPRcleanR v1.2.1

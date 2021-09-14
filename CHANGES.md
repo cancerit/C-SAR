@@ -1,5 +1,9 @@
 # Changes
 
+## 1.3.0
+
+First public release.  Linked to [RCRISPR](https://github.com/cancerit/RCRISPR) 1.1.0.0.
+
 ## 1.2.0
 
 - Update functions for nnmd and glass delta
