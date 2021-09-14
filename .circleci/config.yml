@@ -48,6 +48,9 @@ workflows:
       - license_chk:
           context:
             - dockerhub-casmservice
+          filters:
+            tags:
+              only: /.+/
       - build_docker:
           context:
             - dockerhub-casmservice

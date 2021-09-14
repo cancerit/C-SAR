@@ -1,5 +1,9 @@
 # Changes
 
+## 1.3.1
+
+Teething issue with first tagged CI build
+
 ## 1.3.0
 
 First public release.  Linked to [RCRISPR](https://github.com/cancerit/RCRISPR) 1.1.0.0.
