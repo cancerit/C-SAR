@@ -35,6 +35,10 @@ Once installed, to run C-SAR:
 # native install
 c-sar -c ${ANALYSIS_DIR}/baggen_low_stringency.config -w ${ANALYSIS_DIR}/work
 
+# singularity
+singularity pull quay.io/wtsicgp/c-sar:?.?.?
+singularity exec c-sar_?.?.?.sif c-sar -c $ANALYSIS_DIR/baggen_low_stringency.config -w $ANALYSIS_DIR/work
+
 # docker image
 docker run -ti --rm -v $ANALYSIS_DIR:$ANALYSIS_DIR:rw -e ANALYSIS_DIR=$ANALYSIS_DIR quay.io/wtsicgp/c-sar:?.?.? c-sar -c $ANALYSIS_DIR/baggen_low_stringency.config -w $ANALYSIS_DIR/work
 ```
