@@ -1,0 +1,122 @@
+params {
+    // Default raw count parameters
+    count_id_column_index = 1
+    count_gene_column_index = 2
+    count_count_column_index = 3
+    counts_delim = "\t"
+    counts_header = true
+    count_skip = 0
+
+    // Default raw library parameters
+    library_id_column_index = 1
+    library_gene_column_index = 2
+    library_chr_column_index = false
+    library_start_column_index = false
+    library_end_column_index = false
+    library_delim = "\t"
+    library_header = true
+
+    // Default raw library parameters
+    info_filename_column_index = 1
+    info_label_column_index = 2
+    info_plasmid_column_index = 3
+    info_control_column_index = 4
+    info_treatment_column_index = 5
+    info_group_column_index = false
+    info_reads_column_index = false
+    info_delim = "\t"
+    info_header = true
+
+    // Processed count parameters
+    processed_count_id_column_index = 1
+    processed_count_gene_column_index = 2
+    processed_counts_delim = "\t"
+    processed_counts_header = true
+
+    // Processed library parameters
+    processed_library_id_column_index = 1
+    processed_library_gene_column_index = 2
+    processed_library_chr_column_index = 3
+    processed_library_start_column_index = 4
+    processed_library_end_column_index = 5
+    processed_library_delim = "\t"
+    processed_library_header = true
+
+    // Processed metadata parameters
+    processed_info_filename_column_index = 1
+    processed_info_label_column_index = 2
+    processed_info_plasmid_column_index = 3
+    processed_info_control_column_index = 4
+    processed_info_treatment_column_index = 5
+    processed_info_delim = "\t"
+    processed_info_header = true
+
+    // Counts to matrix and read count matrix
+    counts_to_matrix_outdir = "."
+    counts_to_matrix_count_matrix_outfile = "count_matrix.tsv"
+    counts_to_matrix_library_outfile = "library.processed.tsv"
+    counts_to_matrix_rdata = "counts2matrix.Rdata"
+
+    // Remove user-defined guides
+    remove_guides = null
+    remove_user_guides_outdir = "."
+    remove_user_guides_count_matrix_outfile = "count_matrix.user_defined_guides_removed.tsv"
+    remove_user_guides_library_outfile = "library.user_defined_guides_removed.tsv"
+    remove_user_guides_rdata = "remove_user_defined_guides.Rdata"
+
+    // Remove duplicate guides
+    no_duplicate_removal = false
+    remove_duplicate_guides_outdir = "."
+    remove_duplicate_guides_count_matrix_outfile = "count_matrix.duplicate_guides_removed.tsv"
+    remove_duplicate_guides_library_outfile = "library.duplicate_guides_removed.tsv"
+    remove_duplicate_guides_outfile = "duplicate_guides.tsv"
+    remove_duplicate_guides_rdata = "remove_duplicate_guides.Rdata"
+
+    // Raw filtering
+    no_filter = false
+    filter_type = 'all'
+    filter_method = 'all'
+    raw_filter_outdir = "."
+    raw_filter_count_matrix_outfile = "count_matrix.filtered_guides_removed.tsv"
+    raw_filter_library_outfile = "library.filtered_guides_removed.tsv"
+    raw_filter_outfile = "filtered_guides.tsv"
+    raw_filter_rdata = "filtered_guides.Rdata"
+    min_reads = 30
+
+    // Coordinate filtering
+    coord_filter_outdir = "."
+    coord_filter_count_matrix_outfile = "count_matrix.coord_filtered.tsv"
+    coord_filter_library_outfile = "library.coord_filtered.tsv"
+    coord_filter_outfile = "excluded_guides.tsv"
+    coord_filter_rdata = "coord_filtered.Rdata"
+
+    // Calculate log fold changes
+    calculate_log_fc_outdir = "."
+    calculate_log_fc_count_matrix_outfile = "count_matrix.tsv"
+    calculate_log_fc_sgrna_outfile = "fold_change_matrix.sgrna.tsv"
+    calculate_log_fc_gene_outfile = "fold_change_matrix.gene.tsv"
+    calculate_log_fc_rdata = "calculate_log_fc.Rdata"
+
+    // Scaled log fold changes
+    scaled_lfc_threshold = 0.05
+    scaled_lfc_outdir = "."
+    scaled_lfc_infile_id_column_index = null
+    scaled_lfc_infile_gene_column_index = 1
+    scaled_lfc_infile_delim = "\t"
+    scaled_lfc_infile_header = true
+    scaled_lfc_rdata = "scaled_lfc.Rdata"
+
+    // Essential genes
+    essential_genes = null
+    ess = params.essential_genes
+    ess_gene_column_index = 1
+    no_ess_header = true
+    ess_delim = "\t"
+
+    // Non-essential genes
+    nonessential_genes = null
+    noness = params.nonessential_genes
+    noness_gene_column_index = 1
+    no_noness_header = true
+    noness_delim = "\t"
+}
