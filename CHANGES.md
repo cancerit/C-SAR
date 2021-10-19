@@ -1,5 +1,9 @@
 # Changes
 
+## 1.3.2
+
+Update RCRISPR to 1.1.1.0
+
 ## 1.3.1
 
 Teething issue with first tagged CI build
