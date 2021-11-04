@@ -1,5 +1,9 @@
 # Changes
 
+## 1.3.3
+
+RRA processing enriched/depleted files optional for MAGeCK 
+
 ## 1.3.2
 
 Update RCRISPR to 1.1.1.0
