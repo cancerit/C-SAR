@@ -139,8 +139,8 @@ process MAGeCK_process_results {
     tuple val( sgrna_contrast ), path( mageck_sgrna )
 
   output:
-    path "MAGeCK*.png"
-    path "mageck_rra*.tsv"
+    path "MAGeCK*.png", optional: true
+    path "mageck_rra*.tsv", optional: true
 
   when:
     !params.no_mageck && !params.no_analysis
