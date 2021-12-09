@@ -176,7 +176,7 @@ process intermediate_bagel_classification_qc {
     errorStrategy 'ignore'
 
     publishDir "${params.resultDir}/QC/intermediate/${input_analysis_stage}", mode: 'copy', pattern: "*.png"
-    publishDir "${params.resultDir}/QC/intermediate/${input_analysis_stage}", mode: 'copy', pattern: "bagel_classification_summary*.tsv"
+    publishDir "${params.resultDir}/QC/intermediate/${input_analysis_stage}", mode: 'copy', pattern: "bagel_classification_summary*.tsv", saveAs:  { "bagel_classification_summary.${contrast}.${counts_or_fc}.tsv" }
 
     input:
       tuple val( input_analysis_stage ), val( contrast ), file( library ), file( fc_input_count_matrix ), file( count_matrix ), file( sgrna_fold_change_matrix ), file( gene_fold_change_matrix ), file( sample_mapping )
