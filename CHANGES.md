@@ -1,8 +1,15 @@
 # Changes
 
+## 1.3.4
+
+Add contrast (e.g. treatment_vs_plasmid) and input type (e.g. counts or fc) to filename suffix for intermediate QC BAGEL statistics files.
+
+- With NNMD (gene level fold changes): `bagel_classification_summary.treatment_vs_plasmid.fc.tsv`
+- Without NNMD (sgrna counts): `bagel_classification_summary.treatment_vs_plasmid.counts.tsv`
+
 ## 1.3.3
 
-RRA processing enriched/depleted files optional for MAGeCK 
+RRA processing enriched/depleted files optional for MAGeCK
 
 ## 1.3.2
 
