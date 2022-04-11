@@ -759,7 +759,7 @@ workflow BAGEL_bf {
     bagel_sgrna = BAGEL_bf_sgrna( matrices_for_correction, analysis_indices, 'sgrna' )
 
     // Scale BAGEL gene BFs
-    scale_gene_BFs( bagel_gene, analysis_indices)
+    scale_gene_BFs( bagel_sgrna, analysis_indices)
 
   emit:
     bagel_gene

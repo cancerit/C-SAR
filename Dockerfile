@@ -27,6 +27,7 @@ RUN apt-get update && \
   libblas-dev \
   libssl-dev \
   libssh2-1-dev \
+  libnlopt-dev \
   r-base \
   r-base-dev \
   python3  \
