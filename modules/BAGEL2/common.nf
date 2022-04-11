@@ -134,7 +134,7 @@ process scale_gene_BFs {
   publishDir "${params.resultDir}/BAGEL2/${contrast}/scaled", mode: 'copy', pattern: '*scaled*', overwrite: true
 
   input:
-    tuple val( contrast ), file( bagel_bf_gene )
+    tuple val( contrast ), file( bagel_bf_sgrna )
     val( analysis_indices )
 
   output:
@@ -151,15 +151,17 @@ process scale_gene_BFs {
     script_path = "${baseDir}/submodules/rcrispr/exec/scale_lfcs_and_bfs.R"
     analysis_suffix = "BF.${contrast}"
 
+    treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1"]
+
     cmd = "${params.rscript_exec} ${script_path}"
     cmd = "${cmd} --is_bf"
     cmd = "${cmd} --threshold ${params.scaled_bf_threshold}"
 
-    cmd = "${cmd} --infile \"${bagel_bf_gene}\""
+    cmd = "${cmd} --infile \"${bagel_bf_sgrna}\""
     cmd = ( params.scaled_bf_infile_header ) ? cmd : "${cmd} --no_infile_header"
     cmd = "${cmd} --infile_delim \"${params.scaled_bf_infile_delim}\""
     cmd = "${cmd} --infile_gene_column_index ${params.scaled_bf_infile_gene_column_index}"
-    cmd = "${cmd} --infile_data_column_index \"${params.scaled_bf_infile_data_column_index}\""
+    cmd = "${cmd} --infile_data_column_index \"${treatment_index_values}\""
 
     cmd = "${cmd} --ess \"${params.essential_genes}\""
     cmd = "${cmd} --ess_gene_column_index ${params.ess_gene_column_index}"
