@@ -1,5 +1,11 @@
 # Changes
 
+## 1.3.5
+
+- Requires RCRISPR >= 1.2.1.0
+- Allow QC PCA plots to use shape when groups not enabled
+- Use BAGEL sgRNA BF file to calculate gene-level BFs (average of sgRNA BFs per gene)
+
 ## 1.3.4
 
 Add contrast (e.g. treatment_vs_plasmid) and input type (e.g. counts or fc) to filename suffix for intermediate QC BAGEL statistics files.
