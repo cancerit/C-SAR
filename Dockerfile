@@ -27,6 +27,7 @@ RUN apt-get update && \
   libblas-dev \
   libssl-dev \
   libssh2-1-dev \
+  libnlopt-dev \
   r-base \
   r-base-dev \
   python3  \
@@ -73,7 +74,7 @@ RUN bash build/opt-build.sh $OPT
 FROM rocker/r-ubuntu:20.04
 
 LABEL maintainer="Victoria Offord <vo1@sanger.ac.uk>" \
-      version="1.3.4" \
+      version="1.3.5" \
       description="Nextflow Single CRISPR pipeline container"
 
 # hadolint ignore=DL3008

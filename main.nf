@@ -348,7 +348,8 @@ def get_analysis_indices( sample_totals ) {
                                                                         'base1': ( 1..n_control ).join( ',' ),
                                                                         'base1_increment1': ( 2..(1 + n_control) ).join( ',' ),
                                                                         'base1_increment2': ( 3..(2 + n_control) ).join( ',' ),
-                                                                        'base1_scaled_lfc': ( 2..(n_control - 1) ).join( ',' ) ]
+                                                                        'base1_scaled_lfc': ( 2..(n_control - 1) ).join( ',' ) ],
+                                                  'bf':             [   'base1': ( 3..(3 + (n_control - 1)) ).join( ',' ) ]                      
                                                 ] ]
   }
   if ( n_plasmid > 0 && n_treatment > 0 ) {
@@ -362,7 +363,8 @@ def get_analysis_indices( sample_totals ) {
                                                                             'base1': ( 1..n_treatment ).join( ',' ),
                                                                             'base1_increment2': ( 3..(2 + n_treatment) ).join( ',' ),
                                                                             'base1_increment1': ( 2..(1 + n_treatment) ).join( ',' ),
-                                                                            'base1_scaled_lfc': ( 2..(n_treatment - 1) ).join( ',' ) ] ] ]
+                                                                            'base1_scaled_lfc': ( 2..(n_treatment - 1) ).join( ',' ) ],
+                                                    'bf':               [   'base1': ( 3..(3 + (n_treatment - 1)) ).join( ',' ) ] ] ]
   }
   if ( n_control > 0 && n_treatment > 0 ) {
     n_contrasts++
@@ -375,7 +377,8 @@ def get_analysis_indices( sample_totals ) {
                                                                             'base1': ( 1..n_treatment ).join( ',' ),
                                                                             'base1_increment2': ( 3..(2 + n_treatment) ).join( ',' ),
                                                                             'base1_increment1': ( 2..(1 + n_treatment) ).join( ',' ),
-                                                                            'base1_scaled_lfc': ( 2..(n_treatment - 1) ).join( ',' ) ] ] ]
+                                                                            'base1_scaled_lfc': ( 2..(n_treatment - 1) ).join( ',' ) ],
+                                                    'bf':               [   'base1': ( 3..(3 + (n_treatment - 1)) ).join( ',' ) ] ] ]
   }
   analysis_indices <<  [ 'n_contrasts': n_contrasts ]
   return analysis_indices
@@ -759,7 +762,7 @@ workflow BAGEL_bf {
     bagel_sgrna = BAGEL_bf_sgrna( matrices_for_correction, analysis_indices, 'sgrna' )
 
     // Scale BAGEL gene BFs
-    scale_gene_BFs( bagel_gene, analysis_indices)
+    scale_gene_BFs( bagel_sgrna, analysis_indices)
 
   emit:
     bagel_gene
