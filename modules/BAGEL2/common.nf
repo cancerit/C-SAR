@@ -151,7 +151,7 @@ process scale_gene_BFs {
     script_path = "${baseDir}/submodules/rcrispr/exec/scale_lfcs_and_bfs.R"
     analysis_suffix = "BF.${contrast}"
 
-    treatment_index_values = analysis_indices["${contrast}"]["lfc"]["base1"]
+    treatment_index_values = analysis_indices["${contrast}"]["bf"]["base1"]
 
     cmd = "${params.rscript_exec} ${script_path}"
     cmd = "${cmd} --is_bf"
