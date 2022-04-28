@@ -1,5 +1,9 @@
 # Changes
 
+## 1.3.6
+
+- Update BAGEL config scaled_bf_infile_gene_column_index to 2
+
 ## 1.3.5
 
 - Requires RCRISPR >= 1.2.1.0

@@ -44,7 +44,7 @@ params {
     scaled_bf_threshold = 0.05
     scaled_bf_outdir = "."
     scaled_bf_infile_id_column_index = null
-    scaled_bf_infile_gene_column_index = 1
+    scaled_bf_infile_gene_column_index = 2
     scaled_bf_infile_delim = "\t"
     scaled_bf_infile_header = true
     scaled_bf_rdata = "scaled_BF.Rdata"
