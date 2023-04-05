@@ -77,5 +77,6 @@ header:
     - 'README.md'
     - '**/config/common'
     - '**/*.config'
+    - 'modules/BAGEL2/data/*'
 
   comment: on-failure
