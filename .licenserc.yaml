@@ -78,5 +78,6 @@ header:
     - '**/config/common'
     - '**/*.config'
     - 'modules/BAGEL2/data/*'
+    - 'build/requirements.txt'
 
   comment: on-failure
