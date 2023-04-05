@@ -39,6 +39,15 @@ RUN apt-get update && \
   default-jre \
   git \
   curl \
+  libfontconfig1-dev \
+  libfribidi-dev \
+  libharfbuzz-dev \
+  libtiff-dev \
+  libharfbuzz-dev \
+  libfreetype6-dev \
+  libpng-dev \
+  libtiff5-dev \
+  libjpeg-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
