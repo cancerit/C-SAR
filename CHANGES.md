@@ -1,5 +1,9 @@
 # Changes
 
+## 1.3.7
+
+- Update RCRISPR to 1.2.2.0 (allows numeric sample names in count and fold change matrices)
+
 ## 1.3.6
 
 - Update BAGEL config scaled_bf_infile_gene_column_index to 2

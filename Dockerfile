@@ -39,6 +39,15 @@ RUN apt-get update && \
   default-jre \
   git \
   curl \
+  libfontconfig1-dev \
+  libfribidi-dev \
+  libharfbuzz-dev \
+  libtiff-dev \
+  libharfbuzz-dev \
+  libfreetype6-dev \
+  libpng-dev \
+  libtiff5-dev \
+  libjpeg-dev \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -74,7 +83,7 @@ RUN bash build/opt-build.sh $OPT
 FROM rocker/r-ubuntu:20.04
 
 LABEL maintainer="Victoria Offord <vo1@sanger.ac.uk>" \
-      version="1.3.6" \
+      version="1.3.7" \
       description="Nextflow Single CRISPR pipeline container"
 
 # hadolint ignore=DL3008
