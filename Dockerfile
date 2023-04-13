@@ -83,7 +83,7 @@ RUN bash build/opt-build.sh $OPT
 FROM rocker/r-ubuntu:20.04
 
 LABEL maintainer="Victoria Offord <vo1@sanger.ac.uk>" \
-      version="1.3.7" \
+      version="1.3.8" \
       description="Nextflow Single CRISPR pipeline container"
 
 # hadolint ignore=DL3008
